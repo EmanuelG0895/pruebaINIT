@@ -35,8 +35,8 @@ const config: Config = {
         bug: "#A7B723"
       },
       boxShadow: {
-        'inner-2dp': 'inset 0 2px 2px rgba(0, 0, 0, 0.1)', // Sombra interior de 2px
-        'drop-2dp': '0 2px 4px rgba(0, 0, 0, 0.1)', // Drop shadow de 2dp
+        'custom-inner-shadow': 'inset 0px 0px 7px 7px #E0E0E0', // Sombra interior de 2px
+        'drop-shadow-2dp': '4px 0px 25px -3px #E0E0E0', // Drop shadow de 2dp
         'drop-6dp': '0 6px 12px rgba(0, 0, 0, 0.2)', // Drop shadow de 6dp
       },
     },

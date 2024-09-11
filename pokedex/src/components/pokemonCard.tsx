@@ -10,18 +10,23 @@ export default function PokemonCard({
   pokemonNombre,
 }: PokemonCardProps) {
   return (
-    <a href={`/pokemon/${pokemonId}`}>
-      <div className="p-4 text-center rounded-xl bg-[linear-gradient(to_bottom,#FFFF_60%,#E0E0E0_40%)] shadow-lg hover:shadow-xl transition-shadow duration-300">
-        <div className="mb-2 text-right">#{pokemonId}</div>
-        <img
-          src={pokemonImg}
-          className="w-28 h-28 mx-auto"
-          alt={pokemonNombre}
-        />
-        <div className="p-2 rounded-xl">
-          <p className="capitalize">{pokemonNombre}</p>
+    <>
+      <a
+        href={`/pokemon/${pokemonId}`}
+        className="w-full sm:w-72 md:w-56 lg:w-72 h-44 flex flex-col justify-end bg-white shadow-drop-shadow-2dp mb-3 mt-7 relative mx-auto rounded-xl"
+      >
+        <div className="text-center relative z-10">
+          <div className="text-light idPokemnon text-right mb-16 mr-3">#{pokemonId}</div>
+          <img
+            src={pokemonImg}
+            className="h-28 max-w-xs absolute -bottom-10 left-1/2 transform -translate-x-1/2"
+            alt={pokemonNombre}
+          />
         </div>
-      </div>
-    </a>
+        <div className="bg-light nombre w-full h-14 rounded-xl text-center flex flex-col justify-center relative z-0 mt-3 mb-0">
+          <h2 className="text-dark font-bold">{pokemonNombre}</h2>
+        </div>
+      </a>
+    </>
   );
 }
