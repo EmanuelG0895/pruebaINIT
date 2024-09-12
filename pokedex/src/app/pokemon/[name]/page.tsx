@@ -181,31 +181,36 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
             <h2 className={`text-lg font-bold text-center ${textColor}`}>
               About
             </h2>
-            <div className="mt-10 flex justify-center items-baseline space-x-10">
-              <div className="flex flex-col items-center">
+            <div className="mt-10 flex justify-center items-center space-x-10">
+              <div className="flex items-center space-x-2">
                 <img src="/weight.svg" alt="Peso" className="w-8 h-8" />
-                <p className="mt-1 text-xl font-semibold">
-                  {pokemon.weight / 10} kg
-                </p>
-                <p className="text-light">Weight</p>
+                <div className="flex flex-col items-start">
+                  <p className="text-xl font-semibold">
+                    {pokemon.weight / 10} kg
+                  </p>
+                  <p className="text-light">Weight</p>
+                </div>
               </div>
-              <div className="flex flex-col items-center">
+              <div className="flex items-center space-x-2">
                 <img src="/regla.svg" alt="Altura" className="w-8 h-8" />
-                <p className="mt-1 text-xl font-semibold">
-                  {pokemon.height / 10} m
-                </p>
-                <p className="text-light">Height</p>
+                <div className="flex flex-col items-start">
+                  <p className="text-xl font-semibold">
+                    {pokemon.height / 10} m
+                  </p>
+                  <p className="text-light">Height</p>
+                </div>
               </div>
-              <div className="flex flex-col items-center">
-                <img src="/leaf.svg" alt="Abilities" className="w-8 h-8" />
-                <p className="mt-1 text-xl font-semibold whitespace-pre-line">
-                  {pokemon.abilities
-                    .map((abilityInfo) =>
-                      capitalizeName(abilityInfo.ability.name)
-                    )
-                    .join("\n")}
-                </p>
-                <p className="text-light">Abilities</p>
+              <div className="flex items-center space-x-2">
+                <div className="flex flex-col items-start">
+                  <p className="text-xl font-semibold whitespace-pre-line">
+                    {pokemon.abilities
+                      .map((abilityInfo) =>
+                        capitalizeName(abilityInfo.ability.name)
+                      )
+                      .join("\n")}
+                  </p>
+                  <p className="text-light">Abilities</p>
+                </div>
               </div>
             </div>
             <p className="text-center mt-10">
