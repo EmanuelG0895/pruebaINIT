@@ -3,19 +3,20 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { getPokemons, Pokemon } from "../services/pokeapi";
 import PokemonCard from "../components/pokemonCard";
 import Image from "next/image";
+import Pagination from "../components/Pagination"; // Asegúrate de importar el componente de paginación
 
 const Home = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
-  const [offset, setOffset] = useState<number>(0);
+  const [page, setPage] = useState<number>(1); // Cambiado a página
+  const [totalPages, setTotalPages] = useState<number>(1); // Total de páginas
   const [loading, setLoading] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const loadPokemons = async () => {
+  const loadPokemons = async (pageNumber: number) => {
     setLoading(true);
     try {
-      const data = await getPokemons(10, offset);
+      const data = await getPokemons(10, (pageNumber - 1) * 10); // Ajustado para usar la página
       setPokemons((prevPokemons) => {
         const prevPokemonSet = new Set(
           prevPokemons.map((pokemon) => pokemon.url)
@@ -25,8 +26,7 @@ const Home = () => {
         );
         return [...prevPokemons, ...newPokemons];
       });
-      setOffset((prevOffset) => prevOffset + 10);
-      setHasMore(data.next !== null);
+      setTotalPages(Math.ceil(data.count / 10)); // Ajusta el total de páginas
     } catch (error) {
       console.error("Failed to fetch Pokémon:", error);
     } finally {
@@ -46,22 +46,24 @@ const Home = () => {
   };
 
   useEffect(() => {
-    loadPokemons(); // Cargar Pokémon iniciales
-  }, []);
+    loadPokemons(page); // Cargar Pokémon iniciales
+  }, [page]);
 
   useEffect(() => {
     filterPokemons(searchTerm);
-    if (filteredPokemons.length === 0 && !loading) {
-      loadPokemons();
-    }
   }, [searchTerm, pokemons]);
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
+  const handlePageChange = (page: number) => {
+    setPage(page);
+    setPokemons([]); // Limpiar los Pokémon actuales al cambiar de página
+  };
+
   return (
-    <div className="shadow-lg p-2 bg-primary">
+    <div className="h-screen shadow-lg p-2 bg-primary">
       <div className="titulo flex mb-4 p-4">
         <Image
           className="mr-3"
@@ -70,7 +72,7 @@ const Home = () => {
           width={45}
           height={45}
         />
-        <h1 className="text-4xl font-bold text-white  text-left">Pokédex</h1>
+        <h1 className="text-4xl font-bold text-white text-left">Pokédex</h1>
       </div>
       <div className="relative mb-8 w-full">
         <input
@@ -83,8 +85,8 @@ const Home = () => {
         <Image
           src="/search.svg"
           alt="Search icon"
-          width={24} // Ajusta el tamaño según sea necesario
-          height={24} // Ajusta el tamaño según sea necesario
+          width={24}
+          height={24}
           className="absolute top-1/2 left-3 transform -translate-y-1/2"
         />
       </div>
@@ -105,14 +107,11 @@ const Home = () => {
       </div>
       <div className="text-center mt-4">
         {loading && <span className="text-lg text-white">Loading...</span>}
-        {hasMore && !loading && (
-          <button
-            onClick={loadPokemons}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Load More
-          </button>
-        )}
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );
