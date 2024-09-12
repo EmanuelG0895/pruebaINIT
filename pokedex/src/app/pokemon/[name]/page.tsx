@@ -139,7 +139,7 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
         <div className="flex justify-between p-4">
           <button type="button" onClick={() => router.push("/")}>
             <p className="text-white text-4xl font-bold flex">
-              <Image src="/Vector.svg" alt="" width={50} height={50}/>
+              <Image src="/Vector.svg" alt="" width={50} height={50} />
               {capitalizeName(pokemon.name)}
             </p>
           </button>
@@ -178,22 +178,39 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
 
           {/* About section */}
           <div className="mt-4">
-            <h2 className={`text-lg font-bold ${textColor}`}>About</h2>
-            <p>
+            <h2 className={`text-lg font-bold text-center ${textColor}`}>
+              About
+            </h2>
+            <div className="mt-10 flex justify-center items-baseline space-x-10">
+              <div className="flex flex-col items-center">
+                <img src="/weight.svg" alt="Peso" className="w-8 h-8" />
+                <p className="mt-1 text-xl font-semibold">
+                  {pokemon.weight / 10} kg
+                </p>
+                <p className="text-light">Weight</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <img src="/regla.svg" alt="Altura" className="w-8 h-8" />
+                <p className="mt-1 text-xl font-semibold">
+                  {pokemon.height / 10} m
+                </p>
+                <p className="text-light">Height</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <img src="/leaf.svg" alt="Abilities" className="w-8 h-8" />
+                <p className="mt-1 text-xl font-semibold whitespace-pre-line">
+                  {pokemon.abilities
+                    .map((abilityInfo) =>
+                      capitalizeName(abilityInfo.ability.name)
+                    )
+                    .join("\n")}
+                </p>
+                <p className="text-light">Abilities</p>
+              </div>
+            </div>
+            <p className="text-center mt-10">
               {capitalizeName(pokemon.name)} is a {typeNames} type Pokémon.
             </p>
-            <ul className="mt-2">
-              <li>Weight: {pokemon.weight / 10} kg</li>
-              <li>Height: {pokemon.height / 10} meters</li>
-              <li>
-                Abilities:{" "}
-                {pokemon.abilities
-                  .map((abilityInfo) =>
-                    capitalizeName(abilityInfo.ability.name)
-                  )
-                  .join(", ")}
-              </li>
-            </ul>
           </div>
 
           {/* Pokémon Data */}
