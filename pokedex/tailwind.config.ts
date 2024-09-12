@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         background: "#EFEFEF",
-        primary:"#DC0A2D",
+        primary: "#DC0A2D",
         white: "#FFFFFF",
         light: "#E0E0E0",
         medium: "#666666",
@@ -35,12 +35,33 @@ const config: Config = {
         bug: "#A7B723"
       },
       boxShadow: {
-        'custom-inner-shadow': 'inset 0px 0px 7px 7px #E0E0E0', // Sombra interior de 2px
-        'drop-shadow-2dp': '4px 0px 25px -3px #E0E0E0', // Drop shadow de 2dp
-        'drop-6dp': '0 6px 12px rgba(0, 0, 0, 0.2)', // Drop shadow de 6dp
+        'custom-inner-shadow': 'inset 0px 0px 7px 7px #E0E0E0',
+        'drop-shadow-2dp': '4px 0px 25px -3px #E0E0E0',
+        'drop-6dp': '0 6px 12px rgba(0, 0, 0, 0.2)',
       },
     },
   },
+  safelist: [
+    'text-grass',
+    'text-fire',
+    'text-water',
+    'text-bug',
+    'text-normal',
+    'text-electric',
+    'text-ground',
+    'text-fairy',
+    'text-poison',
+    'text-fighting',
+    'text-flying',
+    'text-psychic',
+    'text-rock',
+    'text-ice',
+    'text-dragon',
+    'text-darkPokemon',
+    'text-steel',
+    'text-ghost',
+  ],
   plugins: [],
 };
+
 export default config;
