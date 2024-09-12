@@ -192,7 +192,7 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <img src="/regla.svg" alt="Altura" className="w-8 h-8" />
+                <img src="/regla.svg" alt="Altura" className="origin-center rotate-90 w-8 h-8" />
                 <div className="flex flex-col items-start">
                   <p className="text-xl font-semibold">
                     {pokemon.height / 10} m
